@@ -65,18 +65,19 @@ public class SecondInterface {
 	 */
 	private void initialize() {
 		frmLambariGeneretor = new JFrame();
-		frmLambariGeneretor.setIconImage(Toolkit.getDefaultToolkit().getImage(SecondInterface.class.getResource("/br/com/unisc/project/frontend/assets/icon_app.png")));
+		frmLambariGeneretor.setIconImage(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\icon_app.png"));
 		frmLambariGeneretor.setTitle("Lambari Generetor");
 		frmLambariGeneretor.setBounds(100, 100, 602, 407);
 		frmLambariGeneretor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		frmLambariGeneretor.setVisible(true);
+
 		JPanel panel = new JPanel();
 		frmLambariGeneretor.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setBackground(Color.GRAY);
-		btnNewButton.setIcon(new ImageIcon(SecondInterface.class.getResource("/br/com/unisc/project/frontend/assets/question.png")));
+		btnNewButton.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\question.png"));
 		btnNewButton.setBounds(545, 11, 31, 33);
 		panel.add(btnNewButton);
 		
@@ -137,7 +138,7 @@ public class SecondInterface {
 		btnGeneretor.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnGeneretor.setForeground(Color.DARK_GRAY);
 		btnGeneretor.setBackground(Color.DARK_GRAY);
-		btnGeneretor.setIcon(new ImageIcon(SecondInterface.class.getResource("/br/com/unisc/project/frontend/assets/start.png")));
+		btnGeneretor.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\start.png"));
 		btnGeneretor.setBounds(10, 287, 232, 70);
 		panel.add(btnGeneretor);
 		
@@ -168,7 +169,7 @@ public class SecondInterface {
 		
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 607, 389);
-		lblNewLabel.setIcon(new ImageIcon(SecondInterface.class.getResource("/br/com/unisc/project/frontend/assets/BackgroundScreen2.png")));
+		lblNewLabel.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\BackgroundScreen2.png"));
 		panel.add(lblNewLabel);
 	}
 }

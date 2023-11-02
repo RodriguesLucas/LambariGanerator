@@ -46,11 +46,11 @@ public class FirstInterface {
 	 */
 	private void initialize() {
 		frmLambariGeneretor = new JFrame();
-		frmLambariGeneretor.setIconImage(Toolkit.getDefaultToolkit().getImage(FirstInterface.class.getResource("/br/com/unisc/project/frontend/assets/icon_app.png")));
+		frmLambariGeneretor.setIconImage(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\icon_app.png"));
 		frmLambariGeneretor.setTitle("Lambari Generetor");
 		frmLambariGeneretor.setBounds(100, 100, 566, 407);
 		frmLambariGeneretor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JPanel panel = new JPanel();
 		frmLambariGeneretor.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
@@ -59,13 +59,13 @@ public class FirstInterface {
 		btnAux.setBackground(Color.GRAY);
 		btnAux.setForeground(Color.GRAY);
 		btnAux.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnAux.setIcon(new ImageIcon(FirstInterface.class.getResource("/br/com/unisc/project/frontend/assets/question.png")));
+		btnAux.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\question.png"));
 		btnAux.setBounds(506, 11, 32, 33);
 		panel.add(btnAux);
 		
 		JButton btnStart = new JButton("Iniciar");
 		btnStart.setFont(new Font("Dialog", Font.BOLD, 18));
-		btnStart.setIcon(new ImageIcon(FirstInterface.class.getResource("/br/com/unisc/project/frontend/assets/start.png")));
+		btnStart.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\start.png"));
 		btnStart.setBounds(205, 324, 123, 33);
 		panel.add(btnStart);
 		btnStart.addActionListener(new ActionListener() {
@@ -75,8 +75,9 @@ public class FirstInterface {
 		
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setBounds(2, 5, 545, 401);
-		lblBackground.setIcon(new ImageIcon(FirstInterface.class.getResource("/br/com/unisc/project/frontend/assets/BackgroundStart.png")));
+		lblBackground.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\BackgroundStart.png"));
 		panel.add(lblBackground);
+		frmLambariGeneretor.setVisible(true);
 	}
 
 }

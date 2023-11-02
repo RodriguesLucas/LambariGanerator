@@ -22,20 +22,6 @@
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/de.jflex/jflex -->
-		<dependency>
-			<groupId>de.jflex</groupId>
-			<artifactId>jflex</artifactId>
-			<version>1.6.0</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/java_cup/java_cup -->
-		<dependency>
-			<groupId>java_cup</groupId>
-			<artifactId>java_cup</artifactId>
-			<version>0.9e</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
