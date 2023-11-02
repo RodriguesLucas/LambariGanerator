@@ -10,7 +10,7 @@ public class MainViewController implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         try {
-            //new TelaInicial();
+            new FirstInterface();
         } catch (Exception e) {
             e.printStackTrace();
         }
