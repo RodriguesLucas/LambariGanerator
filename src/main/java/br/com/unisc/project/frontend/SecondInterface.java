@@ -65,18 +65,21 @@ public class SecondInterface {
 	 */
 	private void initialize() {
 		frmLambariGeneretor = new JFrame();
+		frmLambariGeneretor.setResizable(false);
 		frmLambariGeneretor.setIconImage(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\icon_app.png"));
 		frmLambariGeneretor.setTitle("Lambari Generetor");
 		frmLambariGeneretor.setBounds(100, 100, 602, 407);
 		frmLambariGeneretor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLambariGeneretor.setVisible(true);
+		frmLambariGeneretor.setLocationRelativeTo(null);
 
 		JPanel panel = new JPanel();
 		frmLambariGeneretor.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("");
-		btnNewButton.setBackground(Color.GRAY);
+		btnNewButton.setForeground(Color.LIGHT_GRAY);
+		btnNewButton.setBackground(Color.LIGHT_GRAY);
 		btnNewButton.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\question.png"));
 		btnNewButton.setBounds(545, 11, 31, 33);
 		panel.add(btnNewButton);
@@ -137,7 +140,7 @@ public class SecondInterface {
 		btnGeneretor = new JButton("GERAR");
 		btnGeneretor.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnGeneretor.setForeground(Color.DARK_GRAY);
-		btnGeneretor.setBackground(Color.DARK_GRAY);
+		btnGeneretor.setBackground(Color.LIGHT_GRAY);
 		btnGeneretor.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\start.png"));
 		btnGeneretor.setBounds(10, 287, 232, 70);
 		panel.add(btnGeneretor);
@@ -160,9 +163,10 @@ public class SecondInterface {
 		
 		JComboBox comboBoxInfo = new JComboBox();
 		comboBoxInfo.setModel(new DefaultComboBoxModel(new String[] {"Login", "Senha", "Login & Senha"}));
+		comboBoxInfo.setSelectedIndex(2);
 		comboBoxInfo.setFont(new Font("Dialog", Font.BOLD, 12));
-		comboBoxInfo.setForeground(Color.DARK_GRAY);
-		comboBoxInfo.setBackground(Color.DARK_GRAY);
+		comboBoxInfo.setForeground(Color.BLACK);
+		comboBoxInfo.setBackground(Color.LIGHT_GRAY);
 		comboBoxInfo.setToolTipText("");
 		comboBoxInfo.setBounds(10, 234, 170, 22);
 		panel.add(comboBoxInfo);

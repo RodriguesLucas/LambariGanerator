@@ -46,18 +46,20 @@ public class FirstInterface {
 	 */
 	private void initialize() {
 		frmLambariGeneretor = new JFrame();
+		frmLambariGeneretor.setResizable(false);
 		frmLambariGeneretor.setIconImage(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\icon_app.png"));
 		frmLambariGeneretor.setTitle("Lambari Generetor");
 		frmLambariGeneretor.setBounds(100, 100, 566, 407);
 		frmLambariGeneretor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLambariGeneretor.setLocationRelativeTo(null);
 
 		JPanel panel = new JPanel();
 		frmLambariGeneretor.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		JButton btnAux = new JButton("");
-		btnAux.setBackground(Color.GRAY);
-		btnAux.setForeground(Color.GRAY);
+		btnAux.setBackground(Color.LIGHT_GRAY);
+		btnAux.setForeground(Color.LIGHT_GRAY);
 		btnAux.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnAux.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\br\\com\\unisc\\project\\frontend\\assets\\question.png"));
 		btnAux.setBounds(506, 11, 32, 33);
