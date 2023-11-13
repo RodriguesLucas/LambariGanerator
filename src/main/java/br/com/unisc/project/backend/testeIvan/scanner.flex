@@ -1,4 +1,4 @@
-package br.com.unisc.project.backend;
+package br.com.unisc.project.backend.testeIvan;
 import java_cup.runtime.Symbol;
 
 /*
@@ -19,6 +19,7 @@ eofval: especifica um valor de retorno no final do arquivo
 %full
 %line
 %char
+
 %eofval{
 	return new Symbol(Tokens.EOF,new String("Fim do arquivo"));
 %eofval}

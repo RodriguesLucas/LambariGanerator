@@ -1,79 +1,30 @@
 package br.com.unisc.project.backend;
 import java_cup.runtime.Symbol;
 
-%class LoginLexer
-%unicode
+%%
 
-%{
-import java_cup.runtime.Symbol;
-%}
+%class LoginPasswordLexer
+%full
+%cup
+%line
+%char
 
-%state IN_NAME
-%state IN_LAST_NAME
-%state IN_BIRTHDATE
-%state IN_SITE_OR_SECTOR
+%eofval{
+	return new Symbol(Tokens.EOF,new String("Fim do arquivo"));
+%eofval}
 
-%init{
-    String currentToken = null;
-%}
+// Definindo tokens
+LETTER      = [a-zA-Z]
+DIGIT       = [0-9]
+SPACE       = [\t|\f|" "|\r|\n]
+SPECIAL     = [!@#%&*(-_+=~`}<>,.?]
 
 %%
-"Nome" {
-    currentToken = "Nome";
-    yybegin(IN_NAME);
-}
 
-<IN_NAME>[A-Za-z]+ {
-    return new Symbol(LoginParser.NAME, yytext());
-}
-
-"Sobrenome" {
-    currentToken = "Sobrenome";
-    yybegin(IN_LAST_NAME);
-}
-
-<IN_LAST_NAME>[A-Za-z]+ {
-    return new Symbol(LoginParser.LAST_NAME, yytext());
-}
-
-"Data de nascimento" {
-    currentToken = "Data de nascimento";
-    yybegin(IN_BIRTHDATE);
-}
-
-<IN_BIRTHDATE>[0-9]{2}/[0-9]{2}/[0-9]{4} {
-    return new Symbol(LoginParser.BIRTHDATE, yytext());
-}
-
-"Site ou Setor" {
-    currentToken = "Site ou Setor";
-    yybegin(IN_SITE_OR_SECTOR);
-}
-
-<IN_SITE_OR_SECTOR>[A-Za-z0-9]+ {
-    return new Symbol(LoginParser.SITE_OR_SECTOR, yytext());
-}
-
-<YYINITIAL>\n|\r|\r\n {
-    // Ignore quebras de linha
-}
-
-<IN_NAME>[ \t]+ {
-    // Ignore espaços e tabulações
-}
-
-<IN_LAST_NAME>[ \t]+ {
-    // Ignore espaços e tabulações
-}
-
-<IN_BIRTHDATE>[ \t]+ {
-    // Ignore espaços e tabulações
-}
-
-<IN_SITE_OR_SECTOR>[ \t]+ {
-    // Ignore espaços e tabulações
-}
-
-. {
-    return new Symbol(LoginParser.OTHER, yytext());
-}
+// Regras
+{LETTER}+   { return new Symbol(PasswordSym.LETTER, yytext()); }
+{DIGIT}+    { return new Symbol(PasswordSym.DIGIT, yytext()); }
+{SPECIAL}+  { return new Symbol(PasswordSym.SPECIAL, yytext()); }
+<<EOF>>     { return new Symbol(PasswordSym.EOF); }
+{SPACE}	{}
+.           { System.out.println("Caracter ilegal: " + yytext());  }

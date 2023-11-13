@@ -5,6 +5,8 @@
 
 package br.com.unisc.project.backend.testeIvan;
 
+import java.util.Random;
+
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
 @SuppressWarnings({"rawtypes"})
@@ -39,28 +41,28 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\026\000\012\006\006\011\007\013\004\015\005\001" +
-    "\002\000\016\004\ufff8\005\ufff8\006\ufff8\007\ufff8\012\ufff8" +
-    "\014\027\001\002\000\014\004\ufff9\005\ufff9\006\ufff9\007" +
-    "\ufff9\012\ufff9\001\002\000\012\006\006\011\007\013\004" +
-    "\015\005\001\002\000\012\006\006\011\007\013\004\015" +
+    "\000\026\000\012\006\006\010\007\012\004\014\005\001" +
+    "\002\000\016\004\ufff8\005\ufff8\006\ufff8\007\ufff8\011\ufff8" +
+    "\013\027\001\002\000\014\004\ufff9\005\ufff9\006\ufff9\007" +
+    "\ufff9\011\ufff9\001\002\000\012\006\006\010\007\012\004" +
+    "\014\005\001\002\000\012\006\006\010\007\012\004\014" +
     "\005\001\002\000\012\004\023\005\014\006\017\007\015" +
-    "\001\002\000\014\002\012\006\006\011\007\013\004\015" +
+    "\001\002\000\014\002\012\006\006\010\007\012\004\014" +
     "\005\001\002\000\004\002\000\001\002\000\012\004\016" +
-    "\005\014\006\017\007\015\001\002\000\012\006\006\011" +
-    "\007\013\004\015\005\001\002\000\012\006\006\011\007" +
-    "\013\004\015\005\001\002\000\014\002\001\006\001\011" +
-    "\001\013\001\015\001\001\002\000\012\006\006\011\007" +
-    "\013\004\015\005\001\002\000\014\004\ufffd\005\ufffd\006" +
-    "\ufffd\007\015\012\ufffd\001\002\000\014\004\ufffc\005\ufffc" +
-    "\006\ufffc\007\ufffc\012\ufffc\001\002\000\014\004\ufffe\005" +
-    "\ufffe\006\ufffe\007\015\012\ufffe\001\002\000\014\002\uffff" +
-    "\006\uffff\011\uffff\013\uffff\015\uffff\001\002\000\012\005" +
-    "\014\006\017\007\015\012\025\001\002\000\014\004\ufffa" +
-    "\005\ufffa\006\ufffa\007\ufffa\012\ufffa\001\002\000\014\004" +
-    "\ufffb\005\ufffb\006\ufffb\007\015\012\ufffb\001\002\000\012" +
-    "\006\006\011\007\013\004\015\005\001\002\000\014\004" +
-    "\ufff7\005\014\006\017\007\015\012\ufff7\001\002" });
+    "\005\014\006\017\007\015\001\002\000\012\006\006\010" +
+    "\007\012\004\014\005\001\002\000\012\006\006\010\007" +
+    "\012\004\014\005\001\002\000\014\002\001\006\001\010" +
+    "\001\012\001\014\001\001\002\000\012\006\006\010\007" +
+    "\012\004\014\005\001\002\000\014\004\ufffd\005\ufffd\006" +
+    "\ufffd\007\015\011\ufffd\001\002\000\014\004\ufffc\005\ufffc" +
+    "\006\ufffc\007\ufffc\011\ufffc\001\002\000\014\004\ufffe\005" +
+    "\ufffe\006\ufffe\007\015\011\ufffe\001\002\000\014\002\uffff" +
+    "\006\uffff\010\uffff\012\uffff\014\uffff\001\002\000\012\005" +
+    "\014\006\017\007\015\011\025\001\002\000\014\004\ufffa" +
+    "\005\ufffa\006\ufffa\007\ufffa\011\ufffa\001\002\000\014\004" +
+    "\ufffb\005\ufffb\006\ufffb\007\015\011\ufffb\001\002\000\012" +
+    "\006\006\010\007\012\004\014\005\001\002\000\014\004" +
+    "\ufff7\005\014\006\017\007\015\011\ufff7\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -129,11 +131,16 @@ public class Parser extends java_cup.runtime.lr_parser {
 
 
     // conectar esse parser ao scanner!
-    br.com.unisc.project.backend.Scanner s;
-    Parser(br.com.unisc.project.backend.Scanner s){ this.s=s; }
-
+    Scanner s;
+    Parser(Scanner s){ this.s=s; }
+    Random random = new Random();
     // tabela de símbolos
     java.util.Map<String, Integer> simbolos = new java.util.HashMap<String, Integer>();
+
+    private Integer generateRandomPassword() {
+
+            return 6666666;
+        }
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -208,7 +215,7 @@ class CUP$Parser$actions {
 		int e2left = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Integer e2 = (Integer)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		 RESULT = e1+e2;                
+		 RESULT = e1+e2+generateRandomPassword();                
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

@@ -1,6 +1,9 @@
 package br.com.unisc.project.backend;
 
+import java_cup.runtime.Symbol;
+
 import java.io.FileReader;
+
 
 public class LoginPasswordController {
     public static void main(String[] args) {
@@ -10,6 +13,7 @@ public class LoginPasswordController {
             java -jar jflex-full-1.8.2.jar scanner.flex
             java -jar java-cup-11b.jar -parser Parser -symbols Tokens parser.cup
             */
+
 
             Runtime r = Runtime.getRuntime();
             Process p;
@@ -23,15 +27,15 @@ public class LoginPasswordController {
             // System.out.println(p.waitFor());//se ok, a saída será 0*/
 
 
-           /* Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/entrada.txt"));
+            LoginPasswordLexer scanner = new LoginPasswordLexer(new FileReader("src/main/java/br/com/unisc/project/backend/testeIvan/entrada.txt"));
             System.out.println("Análise Léxica: Lista de Tokens:");
             Symbol s = scanner.next_token();
-            while(s.sym != Tokens.EOF){
+            while(s.sym != PasswordSym.EOF){
                 System.out.printf("<%d, %s>\n", s.sym, s.value);
                 s = scanner.next_token();
             }
 
-            //criando o parser passando o scanner
+           /* //criando o parser passando o scanner
             Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/entrada.txt"));
             Parser parser = new Parser(scanner);
             parser.parse();*/

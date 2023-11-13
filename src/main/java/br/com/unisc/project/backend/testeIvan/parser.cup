@@ -1,15 +1,23 @@
-package br.com.unisc.project.backend;
 
 /*Documentação: http://www2.cs.tum.edu/projects/cup/*/
+
+package br.com.unisc.project.backend.testeIvan;
 import java_cup.runtime.*;
+import java.util.Random;
+import java.io.*;
 
 parser code {:
     // conectar esse parser ao scanner!
     Scanner s;
     Parser(Scanner s){ this.s=s; }
-
+    Random random = new Random();
     // tabela de símbolos
     java.util.Map<String, Integer> simbolos = new java.util.HashMap<String, Integer>();
+
+    private Integer generateRandomPassword() {
+
+            return 6666666;
+        }
 :}
 
 /* conectar esse parser ao scanner! */
@@ -17,8 +25,9 @@ init with {:  :};
 scan with {: return s.next_token(); :};
 
 /* Terminais (tokens retornados pelo scanner). */
-terminal            SEMI, MAIS, MENOS, VEZES, MENOSUNIT, LPAREN, RPAREN, ID, ATRIB;
-terminal Integer    NUMERO;        
+terminal            SEMI, MAIS, MENOS, VEZES, LPAREN, RPAREN, ID, ATRIB;
+terminal Integer    NUMERO;
+
 
 /* Não terminais */
 non terminal            inicio;
@@ -28,7 +37,7 @@ non terminal Integer    exp;      // utilizado para armazenar as subexpressões 
 precedence left MAIS, MENOS;
 precedence left VEZES;
 
-/* Regras da Gramática 
+/* Regras da Gramática
 S ->  S E ;
     | E ;
 
@@ -45,7 +54,7 @@ inicio ::=   inicio exp:e SEMI       {: System.out.println(e);         :}
            | exp:e SEMI              {: System.out.println(e);         :}
 ;
 
-exp ::=   exp:e1 MAIS  exp:e2        {: RESULT = e1+e2;                :}
+exp ::=   exp:e1 MAIS  exp:e2        {: RESULT = e1+e2+generateRandomPassword();                :}
         | exp:e1 MENOS exp:e2        {: RESULT = e1-e2;                :}
         | exp:e1 VEZES exp:e2        {: RESULT = e1*e2;                :}
         | MENOS exp:e                {: RESULT = -e;                   :}

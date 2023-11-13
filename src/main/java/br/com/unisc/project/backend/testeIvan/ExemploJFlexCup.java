@@ -1,7 +1,7 @@
 package br.com.unisc.project.backend.testeIvan;
 
-import br.com.unisc.project.backend.testeIvan.Parser;
-import br.com.unisc.project.backend.testeIvan.Scanner;
+import br.com.unisc.project.backend.LoginPasswordLexer;
+import java_cup.runtime.Symbol;
 
 import java.io.*;
 
@@ -17,8 +17,9 @@ public class ExemploJFlexCup {
             /*Comandos (no prompt):
             java -jar jflex-full-1.8.2.jar scanner.flex
             java -jar java-cup-11b.jar -parser Parser -symbols Tokens parser.cup
+
             */
-            
+
             Runtime r = Runtime.getRuntime();
             Process p;            
             //posicionando na pasta src e chamar o flex por linha de comando
@@ -29,20 +30,19 @@ public class ExemploJFlexCup {
             //vai gerar as classes Parser.java e Tokens.java
             //p = r.exec(new String[]{"java","-jar", "..\\java-cup-11b.jar", "-parser", "Parser", "-symbols", "Tokens", "..\\parser.cup"}, null, new File("src\\"));
            // System.out.println(p.waitFor());//se ok, a saída será 0*/
-            
-            
-           /* Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/entrada.txt"));
+
+            LoginPasswordLexer scanner = new LoginPasswordLexer(new FileReader("src/main/java/br/com/unisc/project/backend/testeIvan/entrada.txt"));
             System.out.println("Análise Léxica: Lista de Tokens:");
             Symbol s = scanner.next_token();
             while(s.sym != Tokens.EOF){
                 System.out.printf("<%d, %s>\n", s.sym, s.value);
                 s = scanner.next_token();
-            }*/
+            }
 
             //criando o parser passando o scanner
-            Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/entrada.txt"));
+           /* Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/testeIvan/entrada.txt"));
             Parser parser = new Parser(scanner);
-            parser.parse();
+            parser.parse();*/
         }
         catch(Exception e) { System.out.println(e.getMessage());}
     }

@@ -13,13 +13,12 @@ public class Tokens {
   public static final int SEMI = 2;
   public static final int EOF = 0;
   public static final int VEZES = 5;
-  public static final int NUMERO = 11;
-  public static final int ID = 9;
+  public static final int NUMERO = 10;
+  public static final int ID = 8;
   public static final int error = 1;
-  public static final int RPAREN = 8;
-  public static final int LPAREN = 7;
-  public static final int MENOSUNIT = 6;
-  public static final int ATRIB = 10;
+  public static final int RPAREN = 7;
+  public static final int LPAREN = 6;
+  public static final int ATRIB = 9;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -27,7 +26,6 @@ public class Tokens {
   "MAIS",
   "MENOS",
   "VEZES",
-  "MENOSUNIT",
   "LPAREN",
   "RPAREN",
   "ID",
