@@ -13,12 +13,14 @@ public class Tokens {
   public static final int LETRA = 2;
   public static final int error = 1;
   public static final int ESPECIAL = 3;
+  public static final int SEPARACAO = 5;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
   "LETRA",
   "ESPECIAL",
-  "NUMERO"
+  "NUMERO",
+  "SEPARACAO"
   };
 }
 

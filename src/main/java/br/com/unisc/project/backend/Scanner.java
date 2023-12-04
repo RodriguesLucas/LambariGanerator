@@ -46,12 +46,12 @@ class Scanner implements java_cup.runtime.Scanner {
   private static final char [] ZZ_CMAP = {
      0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  2,  1,  1,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     1,  3,  0,  3,  0,  3,  3,  0,  3,  3,  3,  3,  3,  3,  3,  3, 
-     4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  3,  3,  3,  3,  3,  3, 
-     3,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 
-     5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  3,  3,  3,  3,  3, 
+     1,  3,  0,  3,  0,  3,  3,  0,  3,  3,  3,  4,  3,  3,  3,  3, 
+     5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  3,  3,  3,  3,  3,  3, 
      3,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6, 
-     6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  0,  0,  3,  3,  0, 
+     6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  3,  3,  3,  3,  3, 
+     3,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7, 
+     7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  0,  0,  3,  3,  0, 
      0,  0,  0,  0,  0,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
@@ -68,10 +68,10 @@ class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\3\1\4\2\5";
+    "\1\0\1\1\1\2\1\3\1\4\1\5\2\6";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[7];
+    int [] result = new int[8];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -96,10 +96,10 @@ class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\7\0\7\0\16\0\25\0\34\0\43";
+    "\0\0\0\10\0\10\0\20\0\30\0\40\0\50\0\60";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[7];
+    int [] result = new int[8];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -122,12 +122,12 @@ class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\1\0\1\4\1\5\1\6\1\7\12\0"+
-    "\3\4\4\0\1\4\1\5\1\4\4\0\2\4\1\6"+
-    "\1\7\5\0\2\7";
+    "\1\2\1\3\1\0\1\4\1\5\1\6\1\7\1\10"+
+    "\13\0\4\4\4\0\1\4\1\5\2\4\4\0\2\4"+
+    "\1\6\1\4\4\0\3\4\1\7\1\10\6\0\2\10";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[42];
+    int [] result = new int[56];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -170,10 +170,10 @@ class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\2\11\4\1";
+    "\1\0\2\11\5\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[7];
+    int [] result = new int[8];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -657,27 +657,32 @@ class Scanner implements java_cup.runtime.Scanner {
             { System.out.println("Caracter ilegal: " + yytext());
             }
             // fall through
-          case 6: break;
+          case 7: break;
           case 2:
             { 
             }
             // fall through
-          case 7: break;
+          case 8: break;
           case 3:
             { return new Symbol(Tokens.ESPECIAL, yytext());
             }
             // fall through
-          case 8: break;
-          case 4:
-            { return new Symbol(Tokens.NUMERO, new Integer(yytext()));
-            }
-            // fall through
           case 9: break;
-          case 5:
-            { return new Symbol(Tokens.LETRA, yytext());
+          case 4:
+            { return new Symbol(Tokens.SEPARACAO, yytext());
             }
             // fall through
           case 10: break;
+          case 5:
+            { return new Symbol(Tokens.NUMERO, new Integer(yytext()));
+            }
+            // fall through
+          case 11: break;
+          case 6:
+            { return new Symbol(Tokens.LETRA, yytext());
+            }
+            // fall through
+          case 12: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
