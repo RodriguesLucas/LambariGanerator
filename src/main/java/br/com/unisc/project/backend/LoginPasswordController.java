@@ -1,12 +1,13 @@
 package br.com.unisc.project.backend;
 
+import java.io.FileReader;
+import java.io.IOException;
+
+import br.com.unisc.project.backend.Scanner;
 import java_cup.runtime.Symbol;
 
-import java.io.FileReader;
-
-
 public class LoginPasswordController {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         try {
 
             /*Comandos (no prompt):
@@ -27,18 +28,19 @@ public class LoginPasswordController {
             // System.out.println(p.waitFor());//se ok, a saída será 0*/
 
 
-            LoginPasswordLexer scanner = new LoginPasswordLexer(new FileReader("src/main/java/br/com/unisc/project/backend/testeIvan/entrada.txt"));
+            /*Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/entrada.txt"));
             System.out.println("Análise Léxica: Lista de Tokens:");
             Symbol s = scanner.next_token();
-            while(s.sym != PasswordSym.EOF){
-                System.out.printf("<%d, %s>\n", s.sym, s.value);
+            while(s.sym != Tokens.EOF){
+                System.out.println("Token: " + s.sym + ", Value: " + s.value);
                 s = scanner.next_token();
-            }
+            }*/
 
-           /* //criando o parser passando o scanner
+
             Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/entrada.txt"));
             Parser parser = new Parser(scanner);
-            parser.parse();*/
+            parser.parse();
+
         }
         catch(Exception e) { System.out.println(e.getMessage());}
     }

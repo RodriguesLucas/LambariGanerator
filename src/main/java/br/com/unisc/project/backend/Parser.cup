@@ -1,0 +1,41 @@
+package br.com.unisc.project.backend;
+import java_cup.runtime.*;
+import java.io.FileReader;
+import java.io.IOException;
+
+import br.com.unisc.project.backend.Scanner;
+import java_cup.runtime.Symbol;
+
+parser code {:
+    // conectar esse parser ao scanner!
+    Scanner s;
+    Parser(Scanner s) throws java.lang.Exception{
+            this.s = s;
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            //Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/entrada.txt"));
+            System.out.println("Análise Léxica: Lista de Tokens:");
+            Symbol symbol = s.next_token();
+            while (symbol.sym != Tokens.EOF) {
+                System.out.println("Token: " + symbol.sym + ", Value: " + symbol.value);
+                symbol = s.next_token();
+            }
+    }
+
+    public void rodrigues(){
+        System.out.println("BBBBBBBBBBBBB");
+    }
+
+:}
+
+/* conectar esse parser ao scanner! */
+init with {:  :};
+scan with {: return s.next_token(); :};
+
+terminal            LETRA, ESPECIAL;
+terminal Integer    NUMERO;
+
+non terminal            inicio;
+
+inicio ::=   {:           rodrigues();         :}
+;
+

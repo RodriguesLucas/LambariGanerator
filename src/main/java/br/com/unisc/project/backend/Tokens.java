@@ -6,18 +6,19 @@
 package br.com.unisc.project.backend;
 
 /** CUP generated class containing symbol constants. */
-
-public class PasswordSym {
+public class Tokens {
   /* terminals */
-  public static final int LETTER = 3;
-  public static final int DIGIT = 2;
-  public static final int SPECIAL = 1;
   public static final int EOF = 0;
-
-  /*public static final String[] terminalNames = new String[] {
-          "EOF",
-          "LETTER",
-          "DIGIT",
-          "SPECIAL",
-  };*/
+  public static final int NUMERO = 4;
+  public static final int LETRA = 2;
+  public static final int error = 1;
+  public static final int ESPECIAL = 3;
+  public static final String[] terminalNames = new String[] {
+  "EOF",
+  "error",
+  "LETRA",
+  "ESPECIAL",
+  "NUMERO"
+  };
 }
+
