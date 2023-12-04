@@ -3,8 +3,7 @@ package br.com.unisc.project.backend;
 import java.io.FileReader;
 import java.io.IOException;
 
-import br.com.unisc.project.backend.Scanner;
-import java_cup.runtime.Symbol;
+import br.com.unisc.project.backend.Parser;
 
 public class LoginPasswordController {
     public static void main(String[] args) throws IOException {
