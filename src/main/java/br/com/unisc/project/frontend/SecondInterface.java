@@ -19,6 +19,7 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Toolkit;
+import com.toedter.calendar.JDateChooser;
 
 public class SecondInterface {
 
@@ -28,7 +29,6 @@ public class SecondInterface {
 	private JTextArea textAreaPassword;
 	private JButton btnGeneretor;
 	private JLabel lblNewLabel;
-	private JTextField textDate;
 	private JLabel lblDate;
 	private JTextField textSurname;
 	private JLabel lblSurname;
@@ -66,7 +66,7 @@ public class SecondInterface {
 	private void initialize() {
 		frmLambariGeneretor = new JFrame();
 		frmLambariGeneretor.setResizable(false);
-		frmLambariGeneretor.setIconImage(new ImageIcon(System.getProperty("user.dir") + "/br/com/unisc/project/frontend/assets/icon_app.png"));
+		frmLambariGeneretor.setIconImage(Toolkit.getDefaultToolkit().getImage(SecondInterface.class.getResource("/br/com/unisc/project/frontend/assets/icon_app.png")));
 		frmLambariGeneretor.setTitle("Lambari Generetor");
 		frmLambariGeneretor.setBounds(100, 100, 663, 439);
 		frmLambariGeneretor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,11 +77,19 @@ public class SecondInterface {
 		frmLambariGeneretor.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(10, 208, 252, 39);
+		panel.add(dateChooser);
+		
 		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setSelectedIcon(new ImageIcon(System.getProperty("user.dir") + "/br/com/unisc/project/frontend/assets/question.png"));
-		btnNewButton.setForeground(Color.LIGHT_GRAY);
-		btnNewButton.setBackground(Color.LIGHT_GRAY);
-		btnNewButton.setIcon(new ImageIcon(System.getProperty("user.dir") +"/br/com/unisc/project/frontend/assets/question.png"));
+		btnNewButton.setForeground(new Color(128, 0, 0));
+		btnNewButton.setBackground(new Color(255, 255, 255));
+		btnNewButton.setIcon(new ImageIcon(System.getProperty("user.dir") + ("/br/com/unisc/project/frontend/assets/question.png"));
 		btnNewButton.setBounds(608, 10, 31, 33);
 		panel.add(btnNewButton);
 		
@@ -96,16 +104,10 @@ public class SecondInterface {
 		panel.add(lblPassword);
 		
 		textName = new JTextField();
-		textName.setBackground(Color.GRAY);
+		textName.setBackground(new Color(255, 255, 255));
 		textName.setColumns(10);
 		textName.setBounds(10, 59, 252, 38);
 		panel.add(textName);
-		
-		textDate = new JTextField();
-		textDate.setBackground(Color.GRAY);
-		textDate.setColumns(10);
-		textDate.setBounds(10, 204, 252, 38);
-		panel.add(textDate);
 		
 		lblDate = new JLabel("Data de Nascimento");
 		lblDate.setFont(new Font("Dialog", Font.BOLD, 16));
@@ -113,7 +115,7 @@ public class SecondInterface {
 		panel.add(lblDate);
 		
 		textSurname = new JTextField();
-		textSurname.setBackground(Color.GRAY);
+		textSurname.setBackground(new Color(255, 255, 255));
 		textSurname.setColumns(10);
 		textSurname.setBounds(10, 131, 252, 39);
 		panel.add(textSurname);
@@ -134,32 +136,37 @@ public class SecondInterface {
 		panel.add(lblInfo);
 		
 		btnGeneretor = new JButton("GERAR");
+		btnGeneretor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnGeneretor.setFont(new Font("Dialog", Font.BOLD, 18));
-		btnGeneretor.setForeground(Color.DARK_GRAY);
-		btnGeneretor.setBackground(Color.LIGHT_GRAY);
+		btnGeneretor.setForeground(new Color(255, 255, 255));
+		btnGeneretor.setBackground(new Color(128, 0, 0));
 		btnGeneretor.setIcon(new ImageIcon(System.getProperty("user.dir") + "/br/com/unisc/project/frontend/assets/start.png"));
 		btnGeneretor.setBounds(10, 318, 252, 74);
 		panel.add(btnGeneretor);
 		
 		textAreaLogin = new JTextArea();
-		textAreaLogin.setBackground(Color.GRAY);
+		textAreaLogin.setBackground(new Color(255, 255, 255));
 		textAreaLogin.setBounds(286, 287, 166, 105);
 		panel.add(textAreaLogin);
 		
 		textInfo = new JTextField();
-		textInfo.setBackground(Color.GRAY);
+		textInfo.setBackground(new Color(255, 255, 255));
 		textInfo.setBounds(10, 270, 252, 38);
 		panel.add(textInfo);
 		textInfo.setColumns(10);
 		
 		textAreaPassword = new JTextArea();
-		textAreaPassword.setBackground(Color.GRAY);
+		textAreaPassword.setForeground(new Color(255, 255, 255));
+		textAreaPassword.setBackground(new Color(255, 255, 255));
 		textAreaPassword.setBounds(470, 287, 169, 105);
 		panel.add(textAreaPassword);
 		
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 649, 427);
-		lblNewLabel.setIcon(new ImageIcon(System.getProperty("user.dir") + "/br/com/unisc/project/frontend/assets/BackgroundScreen4.png"));
+		lblNewLabel.setIcon(new ImageIcon(System.getProperty("user.dir") + ("/br/com/unisc/project/frontend/assets/BackgroundScreen4.png"));
 		panel.add(lblNewLabel);
 	}
 }
