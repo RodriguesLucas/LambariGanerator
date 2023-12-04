@@ -35,9 +35,13 @@ public class LoginPasswordController {
                 s = scanner.next_token();
             }*/
 
-
+/*
             Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/files/entrada.txt"));
             Parser parser = new Parser(scanner);
+            parser.parse();*/
+
+            Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/files/entrada.txt"));
+            ParserLogin parser = new ParserLogin(scanner);
             parser.parse();
 
         }
