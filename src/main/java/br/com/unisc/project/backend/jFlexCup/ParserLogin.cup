@@ -1,0 +1,74 @@
+package br.com.unisc.project.backend;
+import java_cup.runtime.*;
+import java.io.FileReader;
+import java.io.IOException;
+
+import br.com.unisc.project.backend.Scanner;
+import java_cup.runtime.Symbol;
+
+parser code {:
+            private String nome;
+             private String sobrenome;
+             private String dataNascimento;
+             private String setor;
+
+    public void end(){
+        System.out.println("Fim do Fluxo!");
+    }
+    public String getNome(List<Object> o) {
+                     String name = o.get(0).toString();
+                     o.remove(0);
+                     o.remove(0);
+                     return name;
+                 }
+
+                 public String getSobrenome(List<Object> o) {
+                     String sobrenome = o.get(0).toString();
+                     o.remove(0);
+                     o.remove(0);
+                     return sobrenome;
+                 }
+
+                 public String getSetor(List<Object> o) {
+                     String setor = o.get(0).toString();
+                     o.remove(0);
+                     o.remove(0);
+                     return setor;
+                 }
+
+                 public String getDataNascimento(List<Object> o) {
+                     return o.toString().replace("[", "").replace("]", "");
+                 }
+
+
+             Scanner s;
+
+             Parser(Scanner s) throws java.lang.Exception {
+                 this.s = s;
+
+
+             Symbol symbol = s.next_token();
+             while (symbol.sym != Tokens.EOF) {
+                valores.add(symbol.value);
+                symbol = s.next_token();
+             }
+                nome = getNome(valores);
+                 sobrenome = getSobrenome(valores);
+                 setor = getSetor(valores);
+                 dataNascimento = getDataNascimento(valores);
+
+
+:}
+
+/* conectar esse parser ao scanner! */
+init with {:  :};
+scan with {: return s.next_token(); :};
+
+terminal            LETRA, ESPECIAL;
+terminal Integer    NUMERO;
+
+non terminal            fim;
+
+fim ::=   {:           end();         :}
+;
+

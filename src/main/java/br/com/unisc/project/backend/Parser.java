@@ -6,10 +6,18 @@
 package br.com.unisc.project.backend;
 
 import java_cup.runtime.*;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 import br.com.unisc.project.backend.Scanner;
 import java_cup.runtime.Symbol;
+import java_cup.runtime.XMLElement;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -105,24 +113,168 @@ public class Parser extends java_cup.runtime.lr_parser {
     }
 
 
-    // conectar esse parser ao scanner!
-    Scanner s;
-    Parser(Scanner s) throws java.lang.Exception{
-            this.s = s;
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            //Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/entrada.txt"));
-            System.out.println("Análise Léxica: Lista de Tokens:");
-            Symbol symbol = s.next_token();
-            while (symbol.sym != Tokens.EOF) {
-                System.out.println("Token: " + symbol.sym + ", Value: " + symbol.value);
-                symbol = s.next_token();
-            }
-    }
+private List<Object> valores=new ArrayList<>();
+private String nome;
+private String sobrenome;
+private String dataNascimento;
+private String setor;
 
-    public void rodrigues(){
-        System.out.println("BBBBBBBBBBBBB");
-    }
+public void end(){
+        System.out.println("Fim do Fluxo!");
+        }
 
+public String getNome(List<Object> o){
+        String name=o.get(0).toString();
+        o.remove(0);
+        o.remove(0);
+        return name;
+        }
+
+public String getSobrenome(List<Object> o){
+        String sobrenome=o.get(0).toString();
+        o.remove(0);
+        o.remove(0);
+        return sobrenome;
+        }
+
+public String getSetor(List<Object> o){
+        String setor=o.get(0).toString();
+        o.remove(0);
+        o.remove(0);
+        return setor;
+        }
+
+public String getDataNascimento(List<Object> o){
+        return o.toString().replace("[","").replace("]","");
+        }
+
+private String gerarSenha(String nome,String sobrenome,String setor,String dataNascimentoStr){
+        // Geração de valor aleatório
+        String valorAleatorio=gerarValorAleatorio();
+        Random random=new Random();
+
+        // Formatar a data de nascimento
+        SimpleDateFormat dateFormat=new SimpleDateFormat("ddMMyyyy");
+        Date dataNascimento;
+        try{
+        dataNascimento=dateFormat.parse(dataNascimentoStr.replace("/",""));
+        }catch(Exception e){
+        throw new RuntimeException("Erro ao converter a data de nascimento.",e);
+        }
+
+        // Criar variações para a parte inicial da Senha
+        String variacao1=nome.substring(0,1).toLowerCase()+sobrenome.toLowerCase();
+        String variacao2=sobrenome.toLowerCase()+nome.substring(0,1).toLowerCase();
+        String variacao3=setor.substring(0,random.nextInt(0,setor.length())).toUpperCase()+nome.substring(0,1).toLowerCase();
+        String variacao4=setor.substring(0,random.nextInt(0,setor.length())).toUpperCase()+sobrenome.toLowerCase();
+        String variacao5=nome.toLowerCase()+setor.toLowerCase().substring(0,1);
+        String variacao6=sobrenome.toLowerCase()+setor.toLowerCase().substring(0,1);
+
+        // Escolher aleatoriamente uma variação
+        int escolhaVariacao=random.nextInt(6); // Escolher aleatoriamente entre as 6 variações
+
+        String variacaoEscolhida;
+        switch(escolhaVariacao){
+        case 0:
+        variacaoEscolhida=variacao1;
+        break;
+        case 1:
+        variacaoEscolhida=variacao2;
+        break;
+        case 2:
+        variacaoEscolhida=variacao3;
+        break;
+        case 3:
+        variacaoEscolhida=variacao4;
+        break;
+        case 4:
+        variacaoEscolhida=variacao5;
+        break;
+        case 5:
+        variacaoEscolhida=variacao6;
+        break;
+default:
+        variacaoEscolhida=variacao1;
+        }
+
+        // Criar a combinando as informações
+        String password=variacaoEscolhida+
+        setor.substring(0,1).toUpperCase()+getSpecialValue()+
+        dateFormat.format(dataNascimento).toString().substring(random.nextInt(0,4),random.nextInt(3,7))+
+        valorAleatorio;
+
+        return password;
+        }
+
+private String getSpecialValue(){
+        String values="[!@#%&*(-_=~`}<>,.?]";
+        int pos=values.length();
+        Random random=new Random();
+        int valor=random.nextInt(random.nextInt(1,pos));
+        String special=values.substring(valor,valor+1);
+        return special;
+        }
+
+private String gerarValorAleatorio(){
+        // Geração de valor aleatório usando a classe Random
+        Random random=new Random();
+        int valorAleatorio=random.nextInt(1000); // Valor aleatório entre 0 e 999
+        return String.format("%03d",valorAleatorio); // Formatar para garantir três dígitos
+        }
+
+private void salvarValor(List<String> values){
+        try{
+        // Cria um objeto FileWriter para escrever no arquivo
+        FileWriter fileWriter=new FileWriter("src/main/java/br/com/unisc/project/backend/PasswordGenereted");
+
+        // Cria um objeto BufferedWriter para escrever de forma mais eficiente
+        BufferedWriter bufferedWriter=new BufferedWriter(fileWriter);
+
+        // Itera sobre a lista e escreve cada string em uma nova linha
+        for(String value:values){
+        bufferedWriter.write(value);
+        bufferedWriter.newLine(); // Adiciona uma quebra de linha após cada string
+        }
+
+        // Fecha os recursos para liberar os recursos do sistema
+        bufferedWriter.close();
+        fileWriter.close();
+
+        System.out.println("As informações foram salvas no arquivo com sucesso.");
+
+        }catch(IOException e){
+        e.printStackTrace();
+        }
+        }
+
+
+        Scanner s;
+
+        Parser(Scanner s)throws java.lang.Exception{
+        this.s=s;
+
+
+        Symbol symbol=s.next_token();
+        while(symbol.sym!=Tokens.EOF){
+        valores.add(symbol.value);
+        symbol=s.next_token();
+        }
+
+        nome=getNome(valores);
+        sobrenome=getSobrenome(valores);
+        setor=getSetor(valores);
+        dataNascimento=getDataNascimento(valores);
+
+        List<String> passwords=new ArrayList<>();
+
+        for(int i=0;i< 10;i++){
+        String password=gerarSenha(nome,sobrenome,setor,dataNascimento);
+        passwords.add(password);
+        System.out.println("Senha: ".concat(password));
+        }
+
+        salvarValor(passwords);
+        }
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -150,16 +302,16 @@ class CUP$Parser$actions {
       switch (CUP$Parser$act_num)
         {
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 0: // inicio ::= 
+          case 0: // fim ::= 
             {
               Object RESULT =null;
-		           rodrigues();         
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("inicio",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+		           end();         
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("fim",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // $START ::= inicio EOF 
+          case 1: // $START ::= fim EOF 
             {
               Object RESULT =null;
 		int start_valleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;

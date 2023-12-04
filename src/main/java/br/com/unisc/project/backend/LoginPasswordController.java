@@ -36,7 +36,7 @@ public class LoginPasswordController {
             }*/
 
 
-            Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/entrada.txt"));
+            Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/files/entrada.txt"));
             Parser parser = new Parser(scanner);
             parser.parse();
 
