@@ -8,7 +8,6 @@ package br.com.unisc.project.backend;
 import java_cup.runtime.*;
 
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -17,15 +16,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import br.com.unisc.project.backend.Scanner;
 import java_cup.runtime.Symbol;
-import java_cup.runtime.XMLElement;
 
 /**
  * CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
  */
 @SuppressWarnings({"rawtypes"})
-public class ParserLogin extends java_cup.runtime.lr_parser {
+public class ParserPassword extends java_cup.runtime.lr_parser {
 
     public final Class getSymbolContainer() {
         return Tokens.class;
@@ -35,7 +32,7 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
      * Default constructor.
      */
     @Deprecated
-    public ParserLogin() {
+    public ParserPassword() {
         super();
     }
 
@@ -43,14 +40,14 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
      * Constructor which sets the default scanner.
      */
     @Deprecated
-    public ParserLogin(java_cup.runtime.Scanner s) {
+    public ParserPassword(java_cup.runtime.Scanner s) {
         super(s);
     }
 
     /**
      * Constructor which sets the default scanner.
      */
-    public ParserLogin(java_cup.runtime.Scanner s, java_cup.runtime.SymbolFactory sf) {
+    public ParserPassword(java_cup.runtime.Scanner s, java_cup.runtime.SymbolFactory sf) {
         super(s, sf);
     }
 
@@ -101,13 +98,13 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
     /**
      * Instance of action encapsulation class.
      */
-    protected CUP$ParserLogin$actions action_obj;
+    protected CUP$Parser$actions action_obj;
 
     /**
      * Action encapsulation object initializer.
      */
     protected void init_actions() {
-        action_obj = new CUP$ParserLogin$actions(this);
+        action_obj = new CUP$Parser$actions(this);
     }
 
     /**
@@ -120,7 +117,7 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
             int top)
             throws java.lang.Exception {
         /* call code in generated class */
-        return action_obj.CUP$ParserLogin$do_action(act_num, parser, stack, top);
+        return action_obj.CUP$Parser$do_action(act_num, parser, stack, top);
     }
 
     /**
@@ -167,6 +164,7 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
         return s.next_token();
     }
 
+
     private List<Object> valores = new ArrayList<>();
     private String nome;
     private String sobrenome;
@@ -202,33 +200,9 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
         return o.toString().replace("[", "").replace("]", "");
     }
 
-    private void salvarValor(List<String> values) {
-        try {
-            // Cria um objeto FileWriter para escrever no arquivo
-            FileWriter fileWriter = new FileWriter("src/main/java/br/com/unisc/project/backend/files/LoginGenereted");
-
-            // Cria um objeto BufferedWriter para escrever de forma mais eficiente
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-            // Itera sobre a lista e escreve cada string em uma nova linha
-            for (String value : values) {
-                bufferedWriter.write(value);
-                bufferedWriter.newLine(); // Adiciona uma quebra de linha após cada string
-            }
-
-            // Fecha os recursos para liberar os recursos do sistema
-            bufferedWriter.close();
-            fileWriter.close();
-
-            System.out.println("As informações foram salvas no arquivo com sucesso.");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String gerarLogin(String nome, String sobrenome, String setor, String dataNascimentoStr) {
+    private String gerarSenha(String nome, String sobrenome, String setor, String dataNascimentoStr) {
         // Geração de valor aleatório
+        String valorAleatorio = gerarValorAleatorio();
         Random random = new Random();
 
         // Formatar a data de nascimento
@@ -241,12 +215,12 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
         }
 
         // Criar variações para a parte inicial da Senha
-        String variacao1 = nome.substring(0, 1).toLowerCase() + sobrenome.toLowerCase() + setor.toUpperCase();
-        String variacao2 = nome.toLowerCase() + sobrenome.substring(0, 1).toLowerCase() + setor.toLowerCase();
-        String variacao3 = nome.substring(0, 1).toUpperCase() + setor.toLowerCase() + sobrenome.toLowerCase();
-        String variacao4 = nome.toLowerCase() + setor.toLowerCase() + sobrenome.substring(0, 1).toUpperCase();
-        String variacao5 = setor.toLowerCase() + nome.substring(0, 1).toLowerCase() + sobrenome.toLowerCase();
-        String variacao6 = setor.toLowerCase() + nome.toLowerCase() + sobrenome.substring(0, 1).toUpperCase();
+        String variacao1 = nome.substring(0, 1).toLowerCase() + sobrenome.toLowerCase();
+        String variacao2 = sobrenome.toLowerCase() + nome.substring(0, 1).toLowerCase();
+        String variacao3 = setor.substring(0, random.nextInt(0, setor.length())).toUpperCase() + nome.substring(0, 1).toLowerCase();
+        String variacao4 = setor.substring(0, random.nextInt(0, setor.length())).toUpperCase() + sobrenome.toLowerCase();
+        String variacao5 = nome.toLowerCase() + setor.toLowerCase().substring(0, 1);
+        String variacao6 = sobrenome.toLowerCase() + setor.toLowerCase().substring(0, 1);
 
         // Escolher aleatoriamente uma variação
         int escolhaVariacao = random.nextInt(6); // Escolher aleatoriamente entre as 6 variações
@@ -276,16 +250,59 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
         }
 
         // Criar a combinando as informações
-        String login = variacaoEscolhida;
+        String password = variacaoEscolhida +
+                setor.substring(0, 1).toUpperCase() + getSpecialValue() +
+                dateFormat.format(dataNascimento).toString().substring(random.nextInt(0, 4), random.nextInt(3, 7)) +
+                valorAleatorio;
 
-        return login;
-
+        return password;
     }
+
+    private String getSpecialValue() {
+        String values = "[!@#%&*(-_=~`}<>,.?]";
+        int pos = values.length();
+        Random random = new Random();
+        int valor = random.nextInt(random.nextInt(1, pos));
+        String special = values.substring(valor, valor + 1);
+        return special;
+    }
+
+    private String gerarValorAleatorio() {
+        // Geração de valor aleatório usando a classe Random
+        Random random = new Random();
+        int valorAleatorio = random.nextInt(1000); // Valor aleatório entre 0 e 999
+        return String.format("%03d", valorAleatorio); // Formatar para garantir três dígitos
+    }
+
+    private void salvarValor(List<String> values) {
+        try {
+            // Cria um objeto FileWriter para escrever no arquivo
+            FileWriter fileWriter = new FileWriter("src/main/java/br/com/unisc/project/backend/files/PasswordGenereted");
+
+            // Cria um objeto BufferedWriter para escrever de forma mais eficiente
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            // Itera sobre a lista e escreve cada string em uma nova linha
+            for (String value : values) {
+                bufferedWriter.write(value);
+                bufferedWriter.newLine(); // Adiciona uma quebra de linha após cada string
+            }
+
+            // Fecha os recursos para liberar os recursos do sistema
+            bufferedWriter.close();
+            fileWriter.close();
+
+            System.out.println("As informações foram salvas no arquivo com sucesso.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     Scanner s;
 
-
-    ParserLogin(Scanner s) throws java.lang.Exception {
+    ParserPassword(Scanner s) throws java.lang.Exception {
         this.s = s;
 
 
@@ -295,21 +312,20 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
             System.out.printf("<%d, %s>\n", symbol.sym, symbol.value);
             symbol = s.next_token();
         }
+
         nome = getNome(valores);
         sobrenome = getSobrenome(valores);
         setor = getSetor(valores);
         dataNascimento = getDataNascimento(valores);
 
-        List<String> logins = new ArrayList<>();
-
+        List<String> passwords = new ArrayList<>();
 
         for (int i = 0; i < 6; i++) {
-            String login = gerarLogin(nome, sobrenome, setor, dataNascimento);
-            logins.add(login);
+            String password = gerarSenha(nome, sobrenome, setor, dataNascimento);
+            passwords.add(password);
         }
 
-        salvarValor(logins);
-
+        salvarValor(passwords);
     }
 
 
@@ -317,57 +333,57 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
      * Cup generated class to encapsulate user supplied action code.
      */
     @SuppressWarnings({"rawtypes", "unchecked", "unused"})
-    class CUP$ParserLogin$actions {
-        private final ParserLogin parser;
+    class CUP$Parser$actions {
+        private final ParserPassword parserPassword;
 
         /**
          * Constructor
          */
-        CUP$ParserLogin$actions(ParserLogin parser) {
-            this.parser = parser;
+        CUP$Parser$actions(ParserPassword parserPassword) {
+            this.parserPassword = parserPassword;
         }
 
         /**
          * Method 0 with the actual generated action code for actions 0 to 300.
          */
-        public final java_cup.runtime.Symbol CUP$ParserLogin$do_action_part00000000(
-                int CUP$ParserLogin$act_num,
-                java_cup.runtime.lr_parser CUP$ParserLogin$parser,
-                java.util.Stack CUP$ParserLogin$stack,
-                int CUP$ParserLogin$top)
+        public final java_cup.runtime.Symbol CUP$Parser$do_action_part00000000(
+                int CUP$Parser$act_num,
+                java_cup.runtime.lr_parser CUP$Parser$parser,
+                java.util.Stack CUP$Parser$stack,
+                int CUP$Parser$top)
                 throws java.lang.Exception {
             /* Symbol object for return from actions */
-            java_cup.runtime.Symbol CUP$ParserLogin$result;
+            java_cup.runtime.Symbol CUP$Parser$result;
 
             /* select the action based on the action number */
-            switch (CUP$ParserLogin$act_num) {
+            switch (CUP$Parser$act_num) {
                 /*. . . . . . . . . . . . . . . . . . . .*/
                 case 0: // fim ::=
                 {
                     Object RESULT = null;
                     end();
-                    CUP$ParserLogin$result = parser.getSymbolFactory().newSymbol("fim", 0, ((java_cup.runtime.Symbol) CUP$ParserLogin$stack.peek()), RESULT);
+                    CUP$Parser$result = parserPassword.getSymbolFactory().newSymbol("fim", 0, ((java_cup.runtime.Symbol) CUP$Parser$stack.peek()), RESULT);
                 }
-                return CUP$ParserLogin$result;
+                return CUP$Parser$result;
 
                 /*. . . . . . . . . . . . . . . . . . . .*/
                 case 1: // $START ::= fim EOF
                 {
                     Object RESULT = null;
-                    int start_valleft = ((java_cup.runtime.Symbol) CUP$ParserLogin$stack.elementAt(CUP$ParserLogin$top - 1)).left;
-                    int start_valright = ((java_cup.runtime.Symbol) CUP$ParserLogin$stack.elementAt(CUP$ParserLogin$top - 1)).right;
-                    Object start_val = (Object) ((java_cup.runtime.Symbol) CUP$ParserLogin$stack.elementAt(CUP$ParserLogin$top - 1)).value;
+                    int start_valleft = ((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top - 1)).left;
+                    int start_valright = ((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top - 1)).right;
+                    Object start_val = (Object) ((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top - 1)).value;
                     RESULT = start_val;
-                    CUP$ParserLogin$result = parser.getSymbolFactory().newSymbol("$START", 0, ((java_cup.runtime.Symbol) CUP$ParserLogin$stack.elementAt(CUP$ParserLogin$top - 1)), ((java_cup.runtime.Symbol) CUP$ParserLogin$stack.peek()), RESULT);
+                    CUP$Parser$result = parserPassword.getSymbolFactory().newSymbol("$START", 0, ((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top - 1)), ((java_cup.runtime.Symbol) CUP$Parser$stack.peek()), RESULT);
                 }
                 /* ACCEPT */
-                CUP$ParserLogin$parser.done_parsing();
-                return CUP$ParserLogin$result;
+                CUP$Parser$parser.done_parsing();
+                return CUP$Parser$result;
 
                 /* . . . . . .*/
                 default:
                     throw new Exception(
-                            "Invalid action number " + CUP$ParserLogin$act_num + "found in internal parse table");
+                            "Invalid action number " + CUP$Parser$act_num + "found in internal parse table");
 
             }
         } /* end of method */
@@ -375,17 +391,17 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
         /**
          * Method splitting the generated action code into several parts.
          */
-        public final java_cup.runtime.Symbol CUP$ParserLogin$do_action(
-                int CUP$ParserLogin$act_num,
-                java_cup.runtime.lr_parser CUP$ParserLogin$parser,
-                java.util.Stack CUP$ParserLogin$stack,
-                int CUP$ParserLogin$top)
+        public final java_cup.runtime.Symbol CUP$Parser$do_action(
+                int CUP$Parser$act_num,
+                java_cup.runtime.lr_parser CUP$Parser$parser,
+                java.util.Stack CUP$Parser$stack,
+                int CUP$Parser$top)
                 throws java.lang.Exception {
-            return CUP$ParserLogin$do_action_part00000000(
-                    CUP$ParserLogin$act_num,
-                    CUP$ParserLogin$parser,
-                    CUP$ParserLogin$stack,
-                    CUP$ParserLogin$top);
+            return CUP$Parser$do_action_part00000000(
+                    CUP$Parser$act_num,
+                    CUP$Parser$parser,
+                    CUP$Parser$stack,
+                    CUP$Parser$top);
         }
     }
 

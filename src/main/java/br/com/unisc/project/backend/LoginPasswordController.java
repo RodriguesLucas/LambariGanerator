@@ -1,51 +1,78 @@
 package br.com.unisc.project.backend;
 
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import br.com.unisc.project.backend.Parser;
+import javax.swing.*;
 
 public class LoginPasswordController {
-    public static void main(String[] args) throws IOException {
+
+    public void initialzeParser(String nome, String sobrenome, String setor, Date date, JTextArea textAreaLogin, JTextArea textAreaPassword) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String data = dateFormat.format(date);
+
+        saveTextFile(nome, sobrenome, setor, data);
+
         try {
-
-            /*Comandos (no prompt):
-            java -jar jflex-full-1.8.2.jar scanner.flex
-            java -jar java-cup-11b.jar -parser Parser -symbols Tokens parser.cup
-            */
-
-
-            Runtime r = Runtime.getRuntime();
-            Process p;
-            //posicionando na pasta src e chamar o flex por linha de comando
-            //vai gerar a classe Scanner.java
-            // p = r.exec(new String[]{"java", "-jar", "..\\jflex-full-1.8.2.jar", "..\\scanner.flex"}, null, new File("src\\"));
-            // System.out.println(p.waitFor());//se ok, a saída será 0*/
-
-            //vai gerar as classes Parser.java e Tokens.java
-            //p = r.exec(new String[]{"java","-jar", "..\\java-cup-11b.jar", "-parser", "Parser", "-symbols", "Tokens", "..\\parser.cup"}, null, new File("src\\"));
-            // System.out.println(p.waitFor());//se ok, a saída será 0*/
-
-
-            /*Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/entrada.txt"));
-            System.out.println("Análise Léxica: Lista de Tokens:");
-            Symbol s = scanner.next_token();
-            while(s.sym != Tokens.EOF){
-                System.out.println("Token: " + s.sym + ", Value: " + s.value);
-                s = scanner.next_token();
-            }*/
-
-/*
             Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/files/entrada.txt"));
-            Parser parser = new Parser(scanner);
-            parser.parse();*/
+            ParserLogin parserLogin = new ParserLogin(scanner);
+            parserLogin.parse();
 
-            Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/files/entrada.txt"));
-            ParserLogin parser = new ParserLogin(scanner);
-            parser.parse();
+            scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/files/entrada.txt"));
+            ParserPassword parserPassword = new ParserPassword(scanner);
+            parserPassword.parse();
+
+            setValuesInTextoArea(textAreaPassword, "src/main/java/br/com/unisc/project/backend/files/PasswordGenereted");
+            setValuesInTextoArea(textAreaLogin, "src/main/java/br/com/unisc/project/backend/files/LoginGenereted");
+
+        } catch (Exception e) {
 
         }
-        catch(Exception e) { System.out.println(e.getMessage());}
+    }
+
+    private static void setValuesInTextoArea(JTextArea textArea, String url) {
+        try {
+            textArea.setEditable(true);
+            textArea.setText("");
+            BufferedReader br = new BufferedReader(new FileReader(url));
+            String linha;
+
+            while ((linha = br.readLine()) != null) {
+                textArea.append(linha + "\n");
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        textArea.setEditable(false);
+    }
+
+    private void saveTextFile(String nome, String sobrenome, String setor, String data) {
+        try {
+            // Cria um objeto FileWriter para escrever no arquivo
+            FileWriter fileWriter = new FileWriter("src/main/java/br/com/unisc/project/backend/files/entrada.txt");
+
+            // Cria um objeto BufferedWriter para escrever de forma mais eficiente
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            // Lucas + Rodrigues + Facebook + 28/06/2001
+            bufferedWriter.write(nome.concat(getFormat()).concat(sobrenome).concat(getFormat()).concat(setor).concat(getFormat()).concat(data));
+
+
+            // Fecha os recursos para liberar os recursos do sistema
+            bufferedWriter.close();
+            fileWriter.close();
+
+            System.out.println("As informações foram salvas no arquivo com sucesso.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getFormat() {
+        return " + ";
     }
 
 }
