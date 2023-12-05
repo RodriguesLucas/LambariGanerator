@@ -231,22 +231,13 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
         // Geração de valor aleatório
         Random random = new Random();
 
-        // Formatar a data de nascimento
-        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
-        Date dataNascimento;
-        try {
-            dataNascimento = dateFormat.parse(dataNascimentoStr.replace("/", ""));
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao converter a data de nascimento.", e);
-        }
-
         // Criar variações para a parte inicial da Senha
-        String variacao1 = nome.substring(0, 1).toLowerCase() + sobrenome.toLowerCase() + setor.toUpperCase();
-        String variacao2 = nome.toLowerCase() + sobrenome.substring(0, 1).toLowerCase() + setor.toLowerCase();
-        String variacao3 = nome.substring(0, 1).toUpperCase() + setor.toLowerCase() + sobrenome.toLowerCase();
-        String variacao4 = nome.toLowerCase() + setor.toLowerCase() + sobrenome.substring(0, 1).toUpperCase();
-        String variacao5 = setor.toLowerCase() + nome.substring(0, 1).toLowerCase() + sobrenome.toLowerCase();
-        String variacao6 = setor.toLowerCase() + nome.toLowerCase() + sobrenome.substring(0, 1).toUpperCase();
+        String variacao1 = nome.substring(0, 1).toLowerCase() + sobrenome.toUpperCase() + setor.toUpperCase() + dataNascimentoStr.substring(random.nextInt(0, 4), random.nextInt(3, 7));
+        String variacao2 = nome.toLowerCase() + sobrenome.substring(0, 1).toLowerCase() + setor.toLowerCase() + dataNascimentoStr.substring(random.nextInt(0, 4), random.nextInt(3, 7));
+        String variacao3 = nome.substring(0, 1).toUpperCase() + setor.toLowerCase() + sobrenome.toLowerCase() + dataNascimentoStr.substring(random.nextInt(0, 4), random.nextInt(3, 7));
+        String variacao4 = nome.toLowerCase() + setor.toLowerCase() + sobrenome.substring(0, 1).toUpperCase() + dataNascimentoStr.substring(random.nextInt(0, 4), random.nextInt(3, 7));
+        String variacao5 = setor.toLowerCase() + nome.substring(0, 1).toLowerCase() + sobrenome.toLowerCase() + dataNascimentoStr.substring(random.nextInt(0, 4), random.nextInt(3, 7));
+        String variacao6 = setor.toUpperCase() + nome.toLowerCase() + sobrenome.substring(0, 1).toUpperCase() + dataNascimentoStr.substring(random.nextInt(0, 4), random.nextInt(3, 7));
 
         // Escolher aleatoriamente uma variação
         int escolhaVariacao = random.nextInt(6); // Escolher aleatoriamente entre as 6 variações
@@ -275,15 +266,11 @@ public class ParserLogin extends java_cup.runtime.lr_parser {
                 variacaoEscolhida = variacao1;
         }
 
-        // Criar a combinando as informações
-        String login = variacaoEscolhida;
-
-        return login;
+        return variacaoEscolhida;
 
     }
 
     Scanner s;
-
 
     ParserLogin(Scanner s) throws java.lang.Exception {
         this.s = s;

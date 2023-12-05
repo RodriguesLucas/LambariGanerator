@@ -148,10 +148,15 @@ public class SecondInterface {
                 String nome = textName.getText().trim().replace(" ", "");
                 String sobrenome = textSurname.getText().trim().replace(" ", "");
                 String setor = textInfo.getText().trim().replace(" ", "");
-                Date date = dateChooser.getDate();
 
-                loginPasswordController = new LoginPasswordController();
-                loginPasswordController.initialzeParser(nome, sobrenome, setor, date, textAreaLogin, textAreaPassword);
+                if (!nome.isBlank() && !nome.isEmpty() && !sobrenome.isBlank() && !sobrenome.isEmpty() && !setor.isBlank() && !setor.isEmpty() && dateChooser.getDate() != null) {
+                    loginPasswordController = new LoginPasswordController();
+                    loginPasswordController.initializeParser(nome, sobrenome, setor, dateChooser.getDate(), textAreaLogin, textAreaPassword);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Valores faltando ou inseridos de forma incorreta!", "Error", 2);
+                }
+
+
             }
         });
 

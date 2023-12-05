@@ -8,11 +8,10 @@ import javax.swing.*;
 
 public class LoginPasswordController {
 
-    public void initialzeParser(String nome, String sobrenome, String setor, Date date, JTextArea textAreaLogin, JTextArea textAreaPassword) {
+    public void initializeParser(String nome, String sobrenome, String setor, Date date, JTextArea textAreaLogin, JTextArea textAreaPassword) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String data = dateFormat.format(date);
-
-        saveTextFile(nome, sobrenome, setor, data);
+        saveTextInFile(nome, sobrenome, setor, data);
 
         try {
             Scanner scanner = new Scanner(new FileReader("src/main/java/br/com/unisc/project/backend/files/entrada.txt"));
@@ -27,7 +26,7 @@ public class LoginPasswordController {
             setValuesInTextoArea(textAreaLogin, "src/main/java/br/com/unisc/project/backend/files/LoginGenereted");
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -48,7 +47,7 @@ public class LoginPasswordController {
         textArea.setEditable(false);
     }
 
-    private void saveTextFile(String nome, String sobrenome, String setor, String data) {
+    private void saveTextInFile(String nome, String sobrenome, String setor, String data) {
         try {
             // Cria um objeto FileWriter para escrever no arquivo
             FileWriter fileWriter = new FileWriter("src/main/java/br/com/unisc/project/backend/files/entrada.txt");
@@ -56,9 +55,7 @@ public class LoginPasswordController {
             // Cria um objeto BufferedWriter para escrever de forma mais eficiente
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            // Lucas + Rodrigues + Facebook + 28/06/2001
             bufferedWriter.write(nome.concat(getFormat()).concat(sobrenome).concat(getFormat()).concat(setor).concat(getFormat()).concat(data));
-
 
             // Fecha os recursos para liberar os recursos do sistema
             bufferedWriter.close();

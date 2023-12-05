@@ -164,7 +164,6 @@ public class ParserPassword extends java_cup.runtime.lr_parser {
         return s.next_token();
     }
 
-
     private List<Object> valores = new ArrayList<>();
     private String nome;
     private String sobrenome;
@@ -215,8 +214,8 @@ public class ParserPassword extends java_cup.runtime.lr_parser {
         }
 
         // Criar variações para a parte inicial da Senha
-        String variacao1 = nome.substring(0, 1).toLowerCase() + sobrenome.toLowerCase();
-        String variacao2 = sobrenome.toLowerCase() + nome.substring(0, 1).toLowerCase();
+        String variacao1 = nome.substring(0, 1).toLowerCase() + sobrenome.substring(0, 1).toUpperCase() + sobrenome.toLowerCase();
+        String variacao2 = sobrenome.toLowerCase() + nome.substring(0, 1).toUpperCase();
         String variacao3 = setor.substring(0, random.nextInt(0, setor.length())).toUpperCase() + nome.substring(0, 1).toLowerCase();
         String variacao4 = setor.substring(0, random.nextInt(0, setor.length())).toUpperCase() + sobrenome.toLowerCase();
         String variacao5 = nome.toLowerCase() + setor.toLowerCase().substring(0, 1);
@@ -251,9 +250,8 @@ public class ParserPassword extends java_cup.runtime.lr_parser {
 
         // Criar a combinando as informações
         String password = variacaoEscolhida +
-                setor.substring(0, 1).toUpperCase() + getSpecialValue() +
-                dateFormat.format(dataNascimento).toString().substring(random.nextInt(0, 4), random.nextInt(3, 7)) +
-                valorAleatorio;
+                setor.substring(0, 1).toUpperCase() + getSpecialValue() + valorAleatorio
+                + dateFormat.format(dataNascimento).toString().substring(random.nextInt(0, 4), random.nextInt(3, 7));
 
         return password;
     }

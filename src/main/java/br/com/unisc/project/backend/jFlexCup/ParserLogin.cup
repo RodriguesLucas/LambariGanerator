@@ -17,148 +17,136 @@ import java_cup.runtime.XMLElement;
 
 parserPassword code {:
      private List<Object> valores = new ArrayList<>();
-     private String nome;
-     private String sobrenome;
-     private String dataNascimento;
-     private String setor;
+      private String nome;
+      private String sobrenome;
+      private String dataNascimento;
+      private String setor;
 
-     public void end() {
-         System.out.println("Fim do Fluxo!");
-     }
+      public void end() {
+          System.out.println("Fim do Fluxo!");
+      }
 
-     public String getNome(List<Object> o) {
-         String name = o.get(0).toString();
-         o.remove(0);
-         o.remove(0);
-         return name;
-     }
+      public String getNome(List<Object> o) {
+          String name = o.get(0).toString();
+          o.remove(0);
+          o.remove(0);
+          return name;
+      }
 
-     public String getSobrenome(List<Object> o) {
-         String sobrenome = o.get(0).toString();
-         o.remove(0);
-         o.remove(0);
-         return sobrenome;
-     }
+      public String getSobrenome(List<Object> o) {
+          String sobrenome = o.get(0).toString();
+          o.remove(0);
+          o.remove(0);
+          return sobrenome;
+      }
 
-     public String getSetor(List<Object> o) {
-         String setor = o.get(0).toString();
-         o.remove(0);
-         o.remove(0);
-         return setor;
-     }
+      public String getSetor(List<Object> o) {
+          String setor = o.get(0).toString();
+          o.remove(0);
+          o.remove(0);
+          return setor;
+      }
 
-     public String getDataNascimento(List<Object> o) {
-         return o.toString().replace("[", "").replace("]", "");
-     }
+      public String getDataNascimento(List<Object> o) {
+          return o.toString().replace("[", "").replace("]", "");
+      }
 
-     private void salvarValor(List<String> values) {
-         try {
-             // Cria um objeto FileWriter para escrever no arquivo
-             FileWriter fileWriter = new FileWriter("src/main/java/br/com/unisc/project/backend/files/LoginGenereted.txt");
+      private void salvarValor(List<String> values) {
+          try {
+              // Cria um objeto FileWriter para escrever no arquivo
+              FileWriter fileWriter = new FileWriter("src/main/java/br/com/unisc/project/backend/files/LoginGenereted");
 
-             // Cria um objeto BufferedWriter para escrever de forma mais eficiente
-             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+              // Cria um objeto BufferedWriter para escrever de forma mais eficiente
+              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-             // Itera sobre a lista e escreve cada string em uma nova linha
-             for (String value : values) {
-                 bufferedWriter.write(value);
-                 bufferedWriter.newLine(); // Adiciona uma quebra de linha após cada string
-             }
+              // Itera sobre a lista e escreve cada string em uma nova linha
+              for (String value : values) {
+                  bufferedWriter.write(value);
+                  bufferedWriter.newLine(); // Adiciona uma quebra de linha após cada string
+              }
 
-             // Fecha os recursos para liberar os recursos do sistema
-             bufferedWriter.close();
-             fileWriter.close();
+              // Fecha os recursos para liberar os recursos do sistema
+              bufferedWriter.close();
+              fileWriter.close();
 
-             System.out.println("As informações foram salvas no arquivo com sucesso.");
+              System.out.println("As informações foram salvas no arquivo com sucesso.");
 
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
-     }
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+      }
 
-     private String gerarLogin(String nome, String sobrenome, String setor, String dataNascimentoStr) {
-         // Geração de valor aleatório
-         Random random = new Random();
+      private String gerarLogin(String nome, String sobrenome, String setor, String dataNascimentoStr) {
+          // Geração de valor aleatório
+          Random random = new Random();
 
-         // Formatar a data de nascimento
-         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
-         Date dataNascimento;
-         try {
-             dataNascimento = dateFormat.parse(dataNascimentoStr.replace("/", ""));
-         } catch (Exception e) {
-             throw new RuntimeException("Erro ao converter a data de nascimento.", e);
-         }
+          // Criar variações para a parte inicial da Senha
+          String variacao1 = nome.substring(0, 1).toLowerCase() + sobrenome.toUpperCase() + setor.toUpperCase() + dataNascimentoStr.substring(random.nextInt(0, 4), random.nextInt(3, 7));
+          String variacao2 = nome.toLowerCase() + sobrenome.substring(0, 1).toLowerCase() + setor.toLowerCase() + dataNascimentoStr.substring(random.nextInt(0, 4), random.nextInt(3, 7));
+          String variacao3 = nome.substring(0, 1).toUpperCase() + setor.toLowerCase() + sobrenome.toLowerCase() + dataNascimentoStr.substring(random.nextInt(0, 4), random.nextInt(3, 7));
+          String variacao4 = nome.toLowerCase() + setor.toLowerCase() + sobrenome.substring(0, 1).toUpperCase() + dataNascimentoStr.substring(random.nextInt(0, 4), random.nextInt(3, 7));
+          String variacao5 = setor.toLowerCase() + nome.substring(0, 1).toLowerCase() + sobrenome.toLowerCase() + dataNascimentoStr.substring(random.nextInt(0, 4), random.nextInt(3, 7));
+          String variacao6 = setor.toUpperCase() + nome.toLowerCase() + sobrenome.substring(0, 1).toUpperCase() + dataNascimentoStr.substring(random.nextInt(0, 4), random.nextInt(3, 7));
 
-         // Criar variações para a parte inicial da Senha
-         String variacao1 = nome.substring(0, 1).toLowerCase() + sobrenome.toLowerCase() + setor.toUpperCase();
-         String variacao2 = nome.toLowerCase() + sobrenome.substring(0, 1).toLowerCase() + setor.toLowerCase();
-         String variacao3 = nome.substring(0, 1).toUpperCase() + setor.toLowerCase() + sobrenome.toLowerCase();
-         String variacao4 = nome.toLowerCase() + setor.toLowerCase() + sobrenome.substring(0, 1).toUpperCase();
-         String variacao5 = setor.toLowerCase() + nome.substring(0, 1).toLowerCase() + sobrenome.toLowerCase();
-         String variacao6 = setor.toLowerCase() + nome.toLowerCase() + sobrenome.substring(0, 1).toUpperCase();
+          // Escolher aleatoriamente uma variação
+          int escolhaVariacao = random.nextInt(6); // Escolher aleatoriamente entre as 6 variações
 
-         // Escolher aleatoriamente uma variação
-         int escolhaVariacao = random.nextInt(6); // Escolher aleatoriamente entre as 6 variações
+          String variacaoEscolhida;
+          switch (escolhaVariacao) {
+              case 0:
+                  variacaoEscolhida = variacao1;
+                  break;
+              case 1:
+                  variacaoEscolhida = variacao2;
+                  break;
+              case 2:
+                  variacaoEscolhida = variacao3;
+                  break;
+              case 3:
+                  variacaoEscolhida = variacao4;
+                  break;
+              case 4:
+                  variacaoEscolhida = variacao5;
+                  break;
+              case 5:
+                  variacaoEscolhida = variacao6;
+                  break;
+              default:
+                  variacaoEscolhida = variacao1;
+          }
 
-         String variacaoEscolhida;
-         switch (escolhaVariacao) {
-             case 0:
-                 variacaoEscolhida = variacao1;
-                 break;
-             case 1:
-                 variacaoEscolhida = variacao2;
-                 break;
-             case 2:
-                 variacaoEscolhida = variacao3;
-                 break;
-             case 3:
-                 variacaoEscolhida = variacao4;
-                 break;
-             case 4:
-                 variacaoEscolhida = variacao5;
-                 break;
-             case 5:
-                 variacaoEscolhida = variacao6;
-                 break;
-             default:
-                 variacaoEscolhida = variacao1;
-         }
+          return variacaoEscolhida;
 
-         // Criar a combinando as informações
-         String login = variacaoEscolhida;
+      }
 
-         return login;
+      Scanner s;
 
-     }
-
-     Scanner s;
+      ParserLogin(Scanner s) throws java.lang.Exception {
+          this.s = s;
 
 
-     ParserLogin(Scanner s) throws java.lang.Exception {
-         this.s = s;
+          Symbol symbol = s.next_token();
+          while (symbol.sym != Tokens.EOF) {
+              valores.add(symbol.value);
+              System.out.printf("<%d, %s>\n", symbol.sym, symbol.value);
+              symbol = s.next_token();
+          }
+          nome = getNome(valores);
+          sobrenome = getSobrenome(valores);
+          setor = getSetor(valores);
+          dataNascimento = getDataNascimento(valores);
+
+          List<String> logins = new ArrayList<>();
 
 
-         Symbol symbol = s.next_token();
-         while (symbol.sym != Tokens.EOF) {
-             valores.add(symbol.value);
-             System.out.printf("<%d, %s>\n", symbol.sym, symbol.value);
-             symbol = s.next_token();
-         }
-         nome = getNome(valores);
-         sobrenome = getSobrenome(valores);
-         setor = getSetor(valores);
-         dataNascimento = getDataNascimento(valores);
+          for (int i = 0; i < 6; i++) {
+              String login = gerarLogin(nome, sobrenome, setor, dataNascimento);
+              logins.add(login);
+          }
 
-         List<String> logins = new ArrayList<>();
+          salvarValor(logins);
 
-
-         for (int i = 0; i < 6; i++) {
-             String login = gerarLogin(nome, sobrenome, setor, dataNascimento);
-             logins.add(login);
-         }
-
-         salvarValor(logins);
-     }
+      }
 
 :}
 
