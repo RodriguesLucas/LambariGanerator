@@ -120,6 +120,7 @@ Fonte: (AUTORES, 2023).
 Mesmo enfrentando algumas limitações, o sistema atende à sua proposta inicial. O uso dos analisadores em si já serve como um obstáculo natural para a aplicação, sendo um desafio para os membros do grupo, no entanto, conseguimos criar uma ferramenta funcional e intuitiva.
 
 # Apêndice A - ParserLogin.cup
+
 ```bash
 package br.com.unisc.project.backend;
 import java_cup.runtime.*;
