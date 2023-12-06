@@ -32,7 +32,7 @@ Separação[+](utilizado internamente para separar valores para realizar a gera�
 A seguir, na Imagem 1, mais detalhes do código do analisador léxico.
 
 Imagem 1 - Estrutura do analisador léxico (Scanner.flex).
-
+![Imagem 1](https://github.com/RodriguesLucas/LambariGenerator/blob/master/src/main/java/br/com/unisc/project/frontend/assets/imagem1.png)
 Fonte: (AUTORES, 2023).
 
 # 6. Gramática Formal
@@ -86,33 +86,33 @@ Embora não seja um requisito, desenvolvemos uma interface para aprimoramento do
 Possui uma tela Inicial, onde o usuário pode se munir de informações ou iniciar a ferramenta, conforme a figura do lado esquerdo, da Imagem 2, e quando iniciado o programa, é apresentado ao usuário uma tela com os campos para inserção dos dados, botão de geração e dois campos destinados a aparecer os logins e as senhas gerados pelo sistema, conforme figura da direita, da Imagem 2.
 
 Imagem 2 - Tela inicial e tela de aplicação
-
+![Imagem 2](https://github.com/RodriguesLucas/LambariGenerator/blob/master/src/main/java/br/com/unisc/project/frontend/assets/imagem2.png)
 Fonte: (AUTORES, 2023)
 
 Ao clicar no ícone de pergunta, aparece na tela um campo explicando sobre o trabalho, o nome dos integrantes, o número do grupo e ideia proposta, na figura da esquerda da Imagem 3, e, na tela de geração de logins e senhas, o campo é munido com o passo a passo do funcionamento da ferramenta, conforme figura da direita, da Imagem 3.
 
 Imagem 3 - Campo de ajuda (?) das telas desenvolvidas.
-
+![Imagem 3](https://github.com/RodriguesLucas/LambariGenerator/blob/master/src/main/java/br/com/unisc/project/frontend/assets/imagem3.png)
 Fonte: (AUTORES, 2023)
 
 Caso o usuário deixe de inserir algum dos dados requisitados, o sistema notifica o mesmo sobre valores faltando ou inseridos de forma incorreta, e só funcionará quando os valores forem ajustados.
 
 Imagem 4 - Tela de aviso de valores faltando ou inseridos de forma incorreta.
-
+![Imagem 4](https://github.com/RodriguesLucas/LambariGenerator/blob/master/src/main/java/br/com/unisc/project/frontend/assets/imagem4.png)
 Fonte: (AUTORES, 2023).
 
 # 9. Exemplos de Uso
 
 	Abaixo temos alguns exemplos do funcionamento da ferramenta(Imagem 5, Imagem 6 e Imagem 7, os dados inseridos e o resultado obtido após a geração do login e senha.
 Imagem 5 - Funcionamento do sistema.
-
+![Imagem 5](https://github.com/RodriguesLucas/LambariGenerator/blob/master/src/main/java/br/com/unisc/project/frontend/assets/imagem5.png)
 Fonte: (AUTORES, 2023).
 Imagem 6 - Funcionamento do Sistema
-
+![Imagem 6](https://github.com/RodriguesLucas/LambariGenerator/blob/master/src/main/java/br/com/unisc/project/frontend/assets/imagem6.png)
 Fonte: (AUTORES, 2023).
 
 Imagem 7 - Funcionamento do Sistema juntamente com o Terminal
-
+![Imagem 7](https://github.com/RodriguesLucas/LambariGenerator/blob/master/src/main/java/br/com/unisc/project/frontend/assets/imagem7.png)
 Fonte: (AUTORES, 2023).
 
 # 10. Conclusão
