@@ -17,7 +17,7 @@ O usuário fornecerá algumas de suas informações, que são: nome, sobrenome, 
 
 # 4. Definição da linguagem de programação e IDE
 
-	Para realizar a análise léxica e sintática desta aplicação, adotamos as bibliotecas JFlex e Java CUP em Java, conforme recomendado no escopo deste trabalho, utilizando a IDE Eclipse e IntelliJ.
+Para realizar a análise léxica e sintática desta aplicação, adotamos as bibliotecas JFlex e Java CUP em Java, conforme recomendado no escopo deste trabalho, utilizando a IDE Eclipse e IntelliJ.
 
 
 # 5. Definição e elaboração do Analisador Léxico:
@@ -120,7 +120,7 @@ Fonte: (AUTORES, 2023).
 Mesmo enfrentando algumas limitações, o sistema atende à sua proposta inicial. O uso dos analisadores em si já serve como um obstáculo natural para a aplicação, sendo um desafio para os membros do grupo, no entanto, conseguimos criar uma ferramenta funcional e intuitiva.
 
 # Apêndice A - ParserLogin.cup
-
+```bash
 package br.com.unisc.project.backend;
 import java_cup.runtime.*;
 
@@ -284,10 +284,11 @@ non terminal            fim;
 
 fim ::=   {:           end();         :}
 ;
-
+```
 
 # Apêndice B - ParserPassword.cup
 
+```bash
 package br.com.unisc.project.backend;
 import java_cup.runtime.*;
 
@@ -477,6 +478,4 @@ non terminal            fim;
 
 fim ::=   {:           end();         :}
 ;
-
-
-
+```
