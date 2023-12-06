@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MainViewController implements ApplicationRunner {
-
     @Override
     public void run(ApplicationArguments args) throws Exception {
         try {
-            //new TelaInicial();
+            System.setProperty("java.awt.headless", "false");
+            new FirstInterface();
         } catch (Exception e) {
             e.printStackTrace();
         }
